@@ -24,10 +24,10 @@
 
 
         //5th step Connection.
-           include("connection.php");
+        //    include("connection.php");
 
         // Creating Connection 
-        // $link = mysqli_connect("localhost", "root", "", "practice");
+        $link = mysqli_connect("localhost", "root", "", "practice");
 
         // Connection Check
 
