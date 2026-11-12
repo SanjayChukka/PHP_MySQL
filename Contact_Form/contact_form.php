@@ -10,6 +10,13 @@
 <body>
     <h1>Contact Us!</h1>
     <?php
+    // Cookie Handling
+    if(isset($_COOKIE['success'])){
+        echo"<p>".$_COOKIE['success']."</p>";
+    }
+    if(isset($_COOKIE['error'])){
+        echo"<p>".$_COOKIE['error']."</p>";
+    }
 
     // 4th step Accessing the data from the form. 
     function filterData($data)
@@ -38,6 +45,18 @@
         //6th step Inserting into database table
         mysqli_query($link, "insert into contact VALUES('NULL','$name','$email','$mobile','$message')");
 
+        // Handling Success Message.
+        if(mysqli_affected_rows($link)===1){
+            setcookie("success","Thanks we will get back you soon!",time()+1);
+            header("Location:contact_form.php");
+        }
+
+        else{
+            setcookie("error","Sorry! Something went wrong.",time()+1);
+            header("Location:contact_form.php");
+        }
+
+        // Form Finally Submitted  
         echo "Submitted!";
     }
     ?>
